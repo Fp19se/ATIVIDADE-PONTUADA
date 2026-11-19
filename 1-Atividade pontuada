@@ -1,0 +1,81 @@
+import os
+os.system
+
+
+saldo = 500.00
+extrato = []
+
+def mostrar_menu():
+    print("=== Banco Cofrinho - Caixa ===")
+    print("1 - SALDO")
+    print("2 - DEPOSITAR")
+    print("3 - SACAR")
+    print("4 - EXTRATO")
+    print("0 - SAIR")
+
+def ver_saldo(saldo):
+    print("Seu saldo é de: R$", saldo)
+
+def deposito(saldo):
+    valor = float(input("Qual o valor do Deposito? "))
+    if valor >= 1:
+        saldo = saldo + valor
+        print("Deposito realizado com Sucesso!")
+        extrato.append(f"Deposito: + R$ {valor}")
+    else:
+        print("Insira um valor valido para Deposito.")
+    return saldo
+
+def sacar(saldo):
+    valor = float(input("Digite o valor para Sacar: "))
+    if valor <= 0:
+        print("Valor invalido! Insira um valor maior que zero.")
+    elif valor > saldo:
+        print("Saldo insuficiente!")
+    else:
+        saldo = saldo - valor
+        print("Saque realizado com Sucesso!")
+        extrato.append(f"Saque: - R$ {valor}")
+    return saldo
+
+def ver_extrato(saldo):
+    print("\n=== EXTRATO ===")
+    if len(extrato) == 0:
+        print("Nenhuma movimentacao ainda.")
+    else:
+        print(extrato)
+    print("Saldo atual: R$", saldo)
+
+while True:
+    mostrar_menu()
+    opcao = input("Escolha uma Opcao acima: ")
+
+    match opcao:
+        case "1":
+            ver_saldo(saldo)
+            input("Pressione qualquer tecla para continuar...")
+            os.system("cls")
+
+        case "2":
+            saldo = deposito(saldo)
+            input("Pressione qualquer tecla para continuar...")
+            os.system("cls")
+
+        case "3":
+            saldo = sacar(saldo)
+            input("Pressione qualquer tecla para continuar...")
+            os.system("cls")
+
+        case "4":
+            ver_extrato(saldo)
+            input("Pressione qualquer tecla para continuar...")
+            os.system("cls")
+
+        case "0":
+            print("Saindo do Banco Cofrinho...")
+            break
+
+        case _:
+            print("Opcao invalida!")
+            input("Pressione qualquer tecla para continuar...")
+            os.system("cls")
